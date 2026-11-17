@@ -1,779 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Jhon Leigh Venzuela | 3D Designer Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #e0e0e0;
-            background: #0a0a0f;
-            overflow-x: hidden;
-        }
-
-        /* 3D Animated Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0) 50%),
-                        radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.08) 0%, rgba(0, 0, 0, 0) 50%);
-            z-index: -2;
-        }
-
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* Glassmorphism Navbar */
-        nav {
-            background: rgba(10, 10, 20, 0.8);
-            backdrop-filter: blur(12px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -0.5px;
-        }
-
-        .logo span {
-            background: linear-gradient(135deg, #ff00ff, #00ffff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #ccc;
-            font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #00ffff, #ff00ff);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-links a:hover {
-            color: #00ffff;
-        }
-
-        /* Hero Section with 3D Depth */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            padding: 0 2rem;
-            position: relative;
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #ffffff, #00ffff, #ff00ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: fadeInUp 1s ease;
-            letter-spacing: -1px;
-        }
-
-        .tagline {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #00ffff;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-        }
-
-        .description {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            opacity: 0.8;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn-primary {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            color: #0a0a0f;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
-        }
-
-        /* Gallery Section */
-        .gallery {
-            background: rgba(15, 15, 25, 0.7);
-            backdrop-filter: blur(5px);
-            padding: 5rem 0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .gallery h2, .about h2, .contact h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: #888;
-            margin-bottom: 3rem;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .gallery-item {
-            background: rgba(20, 20, 35, 0.8);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            position: relative;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
-            border-color: rgba(0, 255, 255, 0.5);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            transition: all 0.5s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .gallery-item-info {
-            padding: 1rem;
-            text-align: center;
-            background: rgba(10, 10, 20, 0.9);
-        }
-
-        .gallery-item-info h3 {
-            font-size: 1.1rem;
-            color: #00ffff;
-        }
-
-        .zoom-badge {
-            position: absolute;
-            bottom: 70px;
-            right: 15px;
-            background: rgba(0, 255, 255, 0.9);
-            color: #0a0a0f;
-            border-radius: 30px;
-            padding: 5px 12px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-
-        .gallery-item:hover .zoom-badge {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Skills Section */
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            list-style: none;
-            justify-content: center;
-        }
-
-        .skills-list li {
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            color: #00ffff;
-            padding: 0.6rem 1.2rem;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s;
-            backdrop-filter: blur(5px);
-        }
-
-        .skills-list li:hover {
-            transform: translateY(-3px);
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.4), rgba(255, 0, 255, 0.4));
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-        }
-
-        .about {
-            background: rgba(10, 10, 20, 0.5);
-            padding: 5rem 0;
-            backdrop-filter: blur(5px);
-        }
-
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about-text p {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            color: #bbb;
-        }
-
-        .about-text h3 {
-            margin: 1.5rem 0 1rem;
-            color: #00ffff;
-        }
-
-        .contact {
-            background: rgba(15, 15, 25, 0.7);
-            padding: 5rem 0;
-            text-align: center;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            color: #00ffff;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s;
-            display: inline-block;
-            font-weight: 500;
-        }
-
-        .contact-item:hover {
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.4), rgba(255, 0, 255, 0.4));
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-        }
-
-        footer {
-            background: #050508;
-            color: #666;
-            text-align: center;
-            padding: 2rem;
-            border-top: 1px solid rgba(0, 255, 255, 0.2);
-        }
-
-        /* Lightbox 3D Theme */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.98);
-            z-index: 2000;
-            cursor: pointer;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            backdrop-filter: blur(20px);
-        }
-
-        .lightbox.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 90%;
-            position: relative;
-            text-align: center;
-            animation: zoomInScale 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .lightbox-img {
-            max-width: 100%;
-            max-height: 85vh;
-            object-fit: contain;
-            border-radius: 12px;
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
-            border: 1px solid rgba(0, 255, 255, 0.5);
-        }
-
-        .lightbox-caption {
-            color: #00ffff;
-            margin-top: 1.2rem;
-            font-size: 1.2rem;
-            text-align: center;
-            font-weight: 500;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-
-        .lightbox-counter {
-            color: rgba(255,255,255,0.5);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            color: white;
-            font-size: 44px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-            z-index: 2001;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(0, 255, 255, 0.2);
-        }
-
-        .lightbox-close:hover {
-            transform: rotate(90deg) scale(1.1);
-            background: rgba(0, 255, 255, 0.5);
-            color: #0a0a0f;
-        }
-
-        .lightbox-prev,
-        .lightbox-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 255, 255, 0.2);
-            color: white;
-            border: 1px solid rgba(0, 255, 255, 0.5);
-            font-size: 2rem;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2001;
-            backdrop-filter: blur(4px);
-        }
-
-        .lightbox-prev:hover,
-        .lightbox-next:hover {
-            background: rgba(0, 255, 255, 0.6);
-            transform: translateY(-50%) scale(1.1);
-            color: #0a0a0f;
-        }
-
-        .lightbox-prev {
-            left: 25px;
-        }
-
-        .lightbox-next {
-            right: 25px;
-        }
-
-        @keyframes zoomInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.85);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            .tagline {
-                font-size: 1.2rem;
-            }
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                gap: 1.5rem;
-            }
-            .contact-links {
-                flex-direction: column;
-                align-items: center;
-            }
-            .lightbox-prev,
-            .lightbox-next {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
-            .lightbox-close {
-                top: 15px;
-                right: 15px;
-                font-size: 30px;
-                width: 40px;
-                height: 40px;
-            }
-            .lightbox-prev {
-                left: 10px;
-            }
-            .lightbox-next {
-                right: 10px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Jhon Leigh Venzuela | 3D Designer (Tinkercad)</title>
+  <meta name="description" content="Portfolio of Jhon Leigh Venzuela: 30 industrial designs and devices made in Tinkercad. Open for 3D printing file commissions.">
+  <meta property="og:title" content="Jhon Leigh Venzuela | 3D Designer">
+  <meta property="og:description" content="30 machine and device designs made in Tinkercad.">
+  <meta property="og:image" content="images/21.png">
+  <meta name="theme-color" content="#0f1623">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23ff8a3d'/><text x='50' y='68' font-size='52' font-family='sans-serif' font-weight='700' text-anchor='middle' fill='%230f1623'>3D</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <div class="logo">JLV<span>3D</span></div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+  <a class="skip" href="#gallery">Skip to projects</a>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Jhon Leigh Venzuela</h1>
-            <p class="tagline">3D Designer & Visual Artist</p>
-            <p class="description">Creating stunning 3D designs Using Tinkercad that bring ideas to life with cutting-edge technology and artistic vision.</p>
-            <a href="#gallery" class="btn-primary">Explore My Work</a>
-        </div>
-    </section>
-
-    <section id="gallery" class="gallery">
-        <div class="container">
-            <h2>3D Projects</h2>
-            <p class="section-subtitle">✨ Click on any image to zoom in and explore full details ✨</p>
-            <div class="gallery-grid" id="galleryGrid"></div>
-        </div>
-    </section>
-
-    <section id="about" class="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Hello! I'm Jhon Leigh Venzuela, an aspiring and tested 3D designer dedicated to creating immersive and visual designs for clients anywhere.</p>
-                    <p>With expertise in 3D modeling, rendering, and visual effects, I help brands and individuals bring their creative visions to life. Every project is approached with attention to detail and a commitment to excellence.</p>
-                    <h3>Skills & Expertise</h3>
-                    <ul class="skills-list" id="skillsList"></ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Get In Touch</h2>
-            <p class="section-subtitle">Interested in working together? Let's connect!</p>
-            <div class="contact-links">
-                <a href="https://www.facebook.com/jhonleighvenzuela30" target="_blank" class="contact-item">📘 Facebook</a>
-                <a href="mailto:jhon.venzuela@example.com" class="contact-item">✉️ Email</a>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Jhon Leigh Venzuela. All rights reserved. | 3D Visual Artist</p>
-        </div>
-    </footer>
-
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox">
-        <span class="lightbox-close">✕</span>
-        <button class="lightbox-prev" id="prevBtn">‹</button>
-        <button class="lightbox-next" id="nextBtn">›</button>
-        <div class="lightbox-content">
-            <img class="lightbox-img" id="lightboxImg" alt="Zoomed view">
-            <div class="lightbox-caption" id="lightboxCaption"></div>
-            <div class="lightbox-counter" id="lightboxCounter"></div>
-        </div>
+  <header class="nav">
+    <div class="wrap nav-row">
+      <a class="logo" href="#home">JLV<b>3D</b></a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">Menu</button>
+      <nav id="menu" class="menu" aria-label="Main">
+        <a href="#gallery">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="cta-sm">Contact me</a>
+      </nav>
     </div>
+  </header>
 
+  <main>
+    <section id="home" class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-text">
+          <p class="badge">Open for 3D printing file commissions</p>
+          <h1>I design working machines in 3D.</h1>
+          <p class="lead">Jhon Leigh Venzuela, 3D designer. I model industrial designs and devices in Tinkercad for farming, recycling, food processing, and safety.</p>
+          <div class="hero-actions">
+            <a href="#gallery" class="btn">See my projects</a>
+          </div>
+          <dl class="stats">
+            <div><dt>Projects</dt><dd id="statCount">30</dd></div>
+            <div><dt>Categories</dt><dd id="statCats">6</dd></div>
+            <div><dt>Tool</dt><dd>Tinkercad</dd></div>
+          </dl>
+        </div>
+        <div class="hero-shots" aria-hidden="true">
+          <img src="images/21.png" alt="" class="shot s1">
+          <img src="images/19.png" alt="" class="shot s2">
+          <img src="images/26.png" alt="" class="shot s3">
+        </div>
+      </div>
+    </section>
 
+    <section id="gallery" class="section">
+      <div class="wrap">
+        <h2>Projects</h2>
+        <p class="sub">Pick a category, then select any design to view it full size.</p>
+        <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
+        <p class="count" id="resultCount" aria-live="polite"></p>
+        <div class="grid" id="galleryGrid"></div>
+      </div>
+    </section>
 
+    <section id="about" class="section alt">
+      <div class="wrap about">
+        <h2>About me</h2>
+        <div>
+          <p>Hi, I'm Jhon Leigh Venzuela, a 3D designer who turns ideas into prototype-ready models. My work focuses on industrial designs and devices, from automated production machines to smart monitoring and detection systems.</p>
+          <p>I am also accepting 3D printing file commissions. I can model your idea and show you how it will look before it is built.</p>
+          <h3>What I do</h3>
+          <ul class="skills" id="skillsList"></ul>
+        </div>
+      </div>
+    </section>
 
+    <section id="contact" class="section">
+      <div class="wrap contact">
+        <h2>Have an idea to build?</h2>
+        <p class="sub">Send me a message and tell me what you need designed.</p>
+        <div class="hero-actions">
+          <a class="btn" href="https://www.facebook.com/jhonleighvenzuela30" target="_blank" rel="noopener">Message on Facebook</a>
+          <a class="btn ghost" href="mailto:mr.jleigh3d.personal.com@gmail.com">Send an email</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    
-    <script> 
-        const designs = [
-            { title: "Segregator_Burning_Machine", image: "images/1.jpg" },
+  <footer class="foot"><div class="wrap">&copy; 2026 Jhon Leigh Venzuela. All rights reserved.</div></footer>
 
-            { title: "Charging Vendo Station Machine", image: "images/2.jpg" },
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Project viewer" hidden>
+    <button class="lb-btn lb-close" id="lbClose" aria-label="Close">&times;</button>
+    <div class="lb-tools" role="group" aria-label="Zoom controls">
+      <button class="lb-btn" id="zoomOut" aria-label="Zoom out">&minus;</button>
+      <button class="lb-btn" id="zoomIn" aria-label="Zoom in">+</button>
+      <button class="lb-btn lb-reset" id="zoomReset" aria-label="Reset zoom">1&times;</button>
+    </div>
+    <button class="lb-btn lb-prev" id="prevBtn" aria-label="Previous project">&lsaquo;</button>
+    <button class="lb-btn lb-next" id="nextBtn" aria-label="Next project">&rsaquo;</button>
+    <figure class="lb-fig">
+      <div class="lb-stage"><img id="lbImg" alt="" draggable="false"></div>
+      <figcaption><span id="lbCap"></span><small id="lbCount"></small></figcaption>
+    </figure>
+  </div>
 
-            { title: "Cassava Maker Machine", image: "images/3.jpg" },
-
-            { title: "Abacca Drying Flattering Machine", image: "images/4.jpg" },
-
-            { title: "Used Candle Recyling Machine", image: "images/5.jpg" },
-
-            { title: "Alert Port System", image: "images/6.jpg" },
-
-            { title: "Coin Color Detection Device", image: "images/7.jpg" },
-
-            { title: "Compost Maker Machine", image: "images/8.jpg" },
-
-            { title: "Live Monitoring Fire Detection Device", image: "images/9.jpg" },
-
-            { title: "Emergency KeyChain Alert Device", image: "images/10.jpg" },
-
-            { title: "Coconut Milk Grinder Milling Machine", image: "images/11.jpg" },
-
-            { title: "Jack Fruit Cooking Machine.", image: "images/12.jpg" },
-
-            { title: "Printing Vendo Machine", image: "images/13.jpg" },
-
-            { title: "Quality Milk Checking Machine", image: "images/14.jpg" },
-
-            { title: "Compost Mixing Machine", image: "images/15.jpg" },
-
-            { title: "Machine Learning Glass Bottle Vendo Machine", image: "images/16.jpg" },
-
-            { title: "Crayfish Gender Detection Device", image: "images/17.png" }
-        ];
-        const skills = [
-            "3D Modeling",
-            "Texturing",
-            "Lighting & Rendering",
-            "Prototype Visualization",
-            "Online Website Developing"
-        ];
-
-
-
-
-
-        
-        let currentImageIndex = 0;
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightboxImg');
-        const lightboxCaption = document.getElementById('lightboxCaption');
-        const lightboxCounter = document.getElementById('lightboxCounter');
-        
-        function openLightbox(index) {
-            if (index < 0) index = 0;
-            if (index >= designs.length) index = designs.length - 1;
-            currentImageIndex = index;
-            const design = designs[currentImageIndex];
-            lightboxImg.src = design.image;
-            lightboxCaption.textContent = design.title;
-            lightboxCounter.textContent = `${currentImageIndex + 1} / ${designs.length}`;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeLightbox() {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-        
-        function nextImage() {
-            if (currentImageIndex + 1 < designs.length) {
-                openLightbox(currentImageIndex + 1);
-            } else {
-                openLightbox(0);
-            }
-        }
-        
-        function prevImage() {
-            if (currentImageIndex - 1 >= 0) {
-                openLightbox(currentImageIndex - 1);
-            } else {
-                openLightbox(designs.length - 1);
-            }
-        }
-        
-        function renderGallery() {
-            const galleryGrid = document.getElementById('galleryGrid');
-            if (!galleryGrid) return;
-            
-            let html = '';
-            for (let i = 0; i < designs.length; i++) {
-                html += `
-                    <div class="gallery-item" data-index="${i}">
-                        <img src="${designs[i].image}" alt="${designs[i].title}" loading="lazy" onerror="this.src='https://placehold.co/600x400/1a1a2e/00ffff?text=3D+Render'">
-                        <div class="gallery-item-info">
-                            <h3>${designs[i].title}</h3>
-                        </div>
-                        <div class="zoom-badge">🔍 Click to Zoom</div>
-                    </div>
-                `;
-            }
-            galleryGrid.innerHTML = html;
-            
-            const galleryItems = document.querySelectorAll('.gallery-item');
-            galleryItems.forEach((item) => {
-                item.addEventListener('click', (e) => {
-                    const index = parseInt(item.getAttribute('data-index'));
-                    if (!isNaN(index)) openLightbox(index);
-                });
-            });
-        }
-        
-        function renderSkills() {
-            const skillsList = document.getElementById('skillsList');
-            if (!skillsList) return;
-            let html = '';
-            for (let i = 0; i < skills.length; i++) {
-                html += `<li>${skills[i]}</li>`;
-            }
-            skillsList.innerHTML = html;
-        }
-        
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                const target = document.querySelector(targetId);
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-        
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox();
-        });
-        
-        document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
-        document.getElementById('prevBtn').addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
-        document.getElementById('nextBtn').addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
-        
-        document.addEventListener('keydown', (e) => {
-            if (lightbox.classList.contains('active')) {
-                if (e.key === 'Escape') closeLightbox();
-                else if (e.key === 'ArrowRight') nextImage();
-                else if (e.key === 'ArrowLeft') prevImage();
-            }
-        });
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            renderGallery();
-            renderSkills();
-        });
-    </script>
+  <script src="script.js"></script>
 </body>
 </html>
