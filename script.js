@@ -155,19 +155,51 @@ $("zoomIn").onclick = () => zoomBy(1.4);
 $("zoomOut").onclick = () => zoomBy(1/1.4);
 $("zoomReset").onclick = resetZoom;
 
-/* owner alerts: sends a short email via /api/notify (see api/notify.js) */
-const NOTIFY_VISITS = false; // true = also email on every new visit (can get noisy)
-function notify(event){
-  try{
-    if (localStorage.getItem("noNotify")) return; // run localStorage.setItem("noNotify","1") in YOUR browser
-    if (sessionStorage.getItem("n_"+event)) return; // once per visit
-    sessionStorage.setItem("n_"+event, "1");
-    navigator.sendBeacon("/api/notify", new Blob([JSON.stringify({event})], {type:"application/json"}));
-  }catch(e){}
+/* share: phone share sheet if available, otherwise a small panel */
+const sharePanel = $("sharePanel"), shareUrl = $("shareUrl"), shareMsg = $("shareMsg");
+const SHARE_TITLE = document.title;
+const SHARE_TEXT = "Check out this 3D design portfolio: industrial machines and devices made in Tinkercad.";
+let shareFrom = null;
+const pageUrl = () => location.href.split("#")[0];
+function openShare(from){
+  const u = pageUrl(), enc = encodeURIComponent(u);
+  shareFrom = from; shareUrl.value = u; shareMsg.textContent = "";
+  $("shFb").href = "https://www.facebook.com/sharer/sharer.php?u=" + enc;
+  $("shMail").href = "mailto:?subject=" + encodeURIComponent(SHARE_TITLE) + "&body=" + encodeURIComponent(SHARE_TEXT + "\n" + u);
+  sharePanel.hidden = false; $("copyLink").focus();
 }
-document.querySelector('a[href^="mailto:"]').addEventListener("click", () => notify("email_click"));
-document.querySelector('a[href*="facebook.com"]').addEventListener("click", () => notify("facebook_click"));
-if (NOTIFY_VISITS) notify("visit");
+function closeShare(){
+  sharePanel.hidden = true;
+  if (shareFrom) shareFrom.focus();
+}
+async function copyLink(app){
+  const u = pageUrl(), done = app ? `Link copied! Paste it in ${app} (message, story, or post).` : "Link copied!";
+  try{
+    await navigator.clipboard.writeText(u);
+    shareMsg.textContent = done;
+  }catch(e){
+    shareUrl.focus(); shareUrl.select();
+    try{ shareMsg.textContent = document.execCommand("copy") ? done : "Press Ctrl+C (or hold and Copy) to copy the link."; }
+    catch(_){ shareMsg.textContent = "Press Ctrl+C (or hold and Copy) to copy the link."; }
+  }
+}
+// Native share sheet only on touch phones/tablets opened from a real http(s) link.
+// On laptops/desktop (and file:// previews) the built-in panel is used, because Chrome's native share can crash the tab there.
+const canNativeShare = () => !!navigator.share && /^https?:$/.test(location.protocol) && window.matchMedia("(pointer: coarse)").matches;
+document.querySelectorAll("[data-share]").forEach(btn => btn.addEventListener("click", async () => {
+  if (canNativeShare()){
+    try{ await navigator.share({title: SHARE_TITLE, text: SHARE_TEXT, url: pageUrl()}); return; }
+    catch(e){ if (e && e.name === "AbortError") return; } // user closed the share sheet
+  }
+  openShare(btn);
+}));
+$("copyLink").onclick = () => copyLink();
+$("shIg").addEventListener("click", () => copyLink("Instagram")); // Instagram/TikTok have no web share link, so we copy it and open the app/site
+$("shTt").addEventListener("click", () => copyLink("TikTok"));
+$("shareClose").onclick = closeShare;
+sharePanel.addEventListener("click", e => { if (e.target === sharePanel) closeShare(); });
+shareUrl.addEventListener("focus", () => shareUrl.select());
+document.addEventListener("keydown", e => { if (!sharePanel.hidden && e.key === "Escape") closeShare(); });
 
 /* nav */
 const menu = $("menu"), mb = $("menuBtn");
