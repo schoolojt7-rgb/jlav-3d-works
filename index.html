@@ -39,6 +39,7 @@
           <p class="lead">Jhon Leigh Venzuela, 3D designer. I model industrial designs and devices in Tinkercad for farming, recycling, food processing, and safety.</p>
           <div class="hero-actions">
             <a href="#gallery" class="btn">See my projects</a>
+            <button type="button" class="btn ghost" data-share>Share this website</button>
           </div>
           <dl class="stats">
             <div><dt>Projects</dt><dd id="statCount">30</dd></div>
@@ -83,6 +84,7 @@
         <div class="hero-actions">
           <a class="btn" href="https://www.facebook.com/jhonleighvenzuela30" target="_blank" rel="noopener">Message on Facebook</a>
           <a class="btn ghost" href="mailto:mr.jleigh3d.personal.com@gmail.com">Send an email</a>
+          <button type="button" class="btn ghost" data-share>Share this website</button>
         </div>
       </div>
     </section>
@@ -103,6 +105,22 @@
       <div class="lb-stage"><img id="lbImg" alt="" draggable="false"></div>
       <figcaption><span id="lbCap"></span><small id="lbCount"></small></figcaption>
     </figure>
+  </div>
+
+  <div id="sharePanel" class="share-panel" role="dialog" aria-modal="true" aria-label="Share this website" hidden>
+    <div class="share-box">
+      <button type="button" class="lb-btn share-close" id="shareClose" aria-label="Close">&times;</button>
+      <h3>Share this website</h3>
+      <input id="shareUrl" class="share-url" type="text" readonly aria-label="Website link">
+      <div class="share-actions">
+        <button type="button" class="btn" id="copyLink">Copy link</button>
+        <a class="btn ghost" id="shFb" target="_blank" rel="noopener">Facebook</a>
+        <a class="btn ghost" id="shIg" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn ghost" id="shTt" href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a>
+        <a class="btn ghost" id="shMail">Email</a>
+      </div>
+      <p class="share-msg" id="shareMsg" role="status" aria-live="polite"></p>
+    </div>
   </div>
 
   <script src="script.js"></script>
